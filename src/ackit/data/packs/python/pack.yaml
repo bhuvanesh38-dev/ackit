@@ -1,0 +1,9 @@
+name: python
+description: Python project
+priority: 10
+detect:
+  any_files: [pyproject.toml, requirements.txt, setup.py, setup.cfg]
+stack: {languages: [Python], frameworks: []}
+variants:
+  default: {detect_files: [pyproject.toml, requirements.txt], workflow: {build: python -m build, test: python -m pytest, lint: ruff check ., run: ""}, version_sources: pyproject.toml or requirements.txt}
+module_discovery: [dirs]

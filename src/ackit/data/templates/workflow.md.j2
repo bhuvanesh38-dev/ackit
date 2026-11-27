@@ -1,0 +1,18 @@
+# Workflow
+
+## Commands
+
+| Task | Command |
+|---|---|
+{% for k, v in commands.items() %}| {{ k }} | `{{ v }}` |
+{% endfor %}
+## Branching and review
+
+Branch naming, PR flow, who reviews, who merges. Merging is a person's decision.
+
+## Definition of done
+
+- Build and tests pass (commands above), evidence recorded as a test-evidence record
+- Reviewed (review record, verdict approve), security checklist run when the change touches auth, input or data
+- Journal updated with any decision or correction
+- Session entry written

@@ -1,0 +1,2 @@
+- [ ] **{{ prefix }}-01** Replace this line with a check that can be verified by a command or a document.
+- [ ] **{{ prefix }}-02** The documents listed in outputs.md are written or updated.

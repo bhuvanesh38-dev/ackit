@@ -1,0 +1,8 @@
+name: security
+title: "Security reviewer"
+description: "Reviews changes for vulnerabilities, secret exposure and broken access control."
+owns: [review]
+checklists: [checklist.md]
+gates: [handoff]
+tools_allowed: [read, run-readonly-queries]
+suggested_agent: {capability: high, reasoning: deep}

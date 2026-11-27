@@ -1,0 +1,9 @@
+- [ ] **OPS-01** Provisioning and deploy steps are idempotent (re-run safe).
+- [ ] **OPS-02** No secret in the repo, image layers, CI configuration or logs; secrets injected at runtime.
+- [ ] **OPS-03** Rollback procedure written and its trigger defined.
+- [ ] **OPS-04** Monitoring covers health, latency, errors and saturation; alerts have an owner and a runbook link.
+- [ ] **OPS-05** Backups defined, retention stated, restore tested.
+- [ ] **OPS-06** Least privilege reviewed for accounts, tokens and network paths.
+- [ ] **OPS-07** Environments (dev, test, prod) differ only by configuration; the differences are documented.
+- [ ] **OPS-08** Change record exists with approver; no unreviewed change to a shared environment.
+- [ ] **OPS-09** Workflow doc commands match what the pipeline actually runs.

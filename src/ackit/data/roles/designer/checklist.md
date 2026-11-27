@@ -1,0 +1,8 @@
+- [ ] **DSN-01** Each flow has an entry point, the happy path, and the failure and cancel paths.
+- [ ] **DSN-02** Every screen shows default, empty, loading, error and success states.
+- [ ] **DSN-03** Accessibility: keyboard path, focus order, labels, contrast ratios, screen-reader text.
+- [ ] **DSN-04** Consistency: design-system components and tokens used; deviations justified.
+- [ ] **DSN-05** Responsive behaviour and supported viewports specified.
+- [ ] **DSN-06** Copy written for labels, hints, errors and confirmations.
+- [ ] **DSN-07** Handoff to the developer: spacing, tokens, interactions, and the checks that prove the build matches.
+- [ ] **DSN-08** Requirements and acceptance criteria are covered by the design; gaps raised with the business analyst.

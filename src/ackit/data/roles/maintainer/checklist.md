@@ -1,0 +1,7 @@
+- [ ] **MNT-01** `ackit validate --strict` reports no errors and every warning is understood.
+- [ ] **MNT-02** Documents past `review_by` are re-verified, updated or deprecated.
+- [ ] **MNT-03** Rules still have a Why that holds; obsolete rules are deprecated.
+- [ ] **MNT-04** index.md lists every concept; log.md has an entry for this change.
+- [ ] **MNT-05** Module docs match the actual modules (new or removed ones).
+- [ ] **MNT-06** AGENTS.md within budget and its table points at real files.
+- [ ] **MNT-07** Done items have evidence, review and journal (validator ACF012).

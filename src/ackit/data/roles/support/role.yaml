@@ -1,0 +1,8 @@
+name: support
+title: "Support engineer"
+description: "Drafts ticket resolutions, issue patterns and platform-behaviour pages from ticket evidence; never marks them verified."
+owns: [ticket-resolution, issue-pattern, platform-behaviour]
+checklists: [checklist.md]
+gates: []
+tools_allowed: [read, edit-docs, run-readonly-queries]
+suggested_agent: {capability: standard, reasoning: normal}

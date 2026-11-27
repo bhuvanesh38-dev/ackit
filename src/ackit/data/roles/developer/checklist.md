@@ -1,0 +1,10 @@
+- [ ] **DEV-01** Work item status is `ready` or `in-progress`; its stages are signed off (large features).
+- [ ] **DEV-02** Blocking rules read; none broken (state the check you ran for each that applies).
+- [ ] **DEV-03** Callers and usages of every edited symbol listed; blast radius reported.
+- [ ] **DEV-04** Build and lint commands pass (paste the summary line).
+- [ ] **DEV-05** Tests added or updated for the change; the test command passes.
+- [ ] **DEV-06** Acceptance criteria each mapped to a test or a manual check.
+- [ ] **DEV-07** No secret, credential or personal data added anywhere.
+- [ ] **DEV-08** Diff reviewed by you: no stray files, debug output or unrelated edits.
+- [ ] **DEV-09** Docs you changed (module, reference, rule) are updated and still valid.
+- [ ] **DEV-10** Journal has an entry for each decision or correction; session entry written.

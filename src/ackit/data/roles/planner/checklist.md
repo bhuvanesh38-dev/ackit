@@ -1,0 +1,8 @@
+- [ ] **PLN-01** Problem statement and non-goals are written and agree with the product doc.
+- [ ] **PLN-02** Findings cite the code or data examined (file or query), not memory.
+- [ ] **PLN-03** Design lists alternatives and the reason for the choice; a decision record exists.
+- [ ] **PLN-04** Plan steps are ordered, each verifiable.
+- [ ] **PLN-05** Tasks name modules, have acceptance criteria and `depends_on` where order matters.
+- [ ] **PLN-06** Risks, rollout and rollback considered; migrations and contracts flagged.
+- [ ] **PLN-07** Test plan written (cases, environments).
+- [ ] **PLN-08** Each finished stage has `signoff` requested from the human owner.

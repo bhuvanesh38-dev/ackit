@@ -1,0 +1,8 @@
+# Example mapping for `ackit import`: first matching rule wins; `default` catches the rest.
+project: my-service
+skip: ["drafts/**"]
+rules:
+  - {match: "AGENTS.md", type: entry, dest: "AGENTS.md"}
+  - {match: "rules/*.md", type: rule, dest: "rules/{stem}.md", id: "R-{stem}", set: {severity: advisory}}
+  - {match: "adr/*.md", type: decision, dest: "decisions/{stem}.md", set: {date: "2000-01-01"}}
+default: {type: reference, dest: "reference/{stem}.md", set: {description: "Imported reference material"}}

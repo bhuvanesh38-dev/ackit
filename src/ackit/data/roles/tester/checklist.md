@@ -1,0 +1,9 @@
+- [ ] **TST-01** Each acceptance criterion maps to at least one case.
+- [ ] **TST-02** Negative cases: invalid input, missing permission, empty and boundary values.
+- [ ] **TST-03** Regression cases for the modules in "Module context".
+- [ ] **TST-04** Commands copy-pasteable and actually run; output quoted.
+- [ ] **TST-05** Environment, build or commit, and data used are recorded.
+- [ ] **TST-06** Every failure has an issue with reproduction steps.
+- [ ] **TST-07** Idempotency / repeat-run behaviour checked where the change writes data.
+- [ ] **TST-08** Coverage gaps stated explicitly.
+- [ ] **TST-09** `result:` in the evidence record matches the results (pass only when all cases pass).

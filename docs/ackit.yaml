@@ -1,0 +1,9 @@
+project: agent-context-kit
+pack: python
+size: small
+agents_md_max_lines: 150
+links: warn
+severity: {}
+# the guides at the bundle root are reference documents; they are not required to live under reference/
+types:
+  reference: {dir: ''}

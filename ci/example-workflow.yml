@@ -1,0 +1,12 @@
+# Example for a hosted CI that reads YAML workflows (any host: the commands are the contract).
+name: context
+on: [push, pull_request]
+jobs:
+  validate-context:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install ackit
+      - run: ackit validate context --strict

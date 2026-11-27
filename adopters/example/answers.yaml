@@ -1,0 +1,6 @@
+project: my-service
+purpose: One sentence describing what the service does.
+owner: your-handle
+size: small
+commands:
+  test: make test

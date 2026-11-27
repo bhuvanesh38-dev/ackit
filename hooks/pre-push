@@ -1,0 +1,12 @@
+#!/bin/sh
+# ACF pre-push hook: run the adopter's `process_checks` for the push (ackit.yaml of the bundle).
+# Install: cp hooks/pre-push .git/hooks/pre-push && chmod +x .git/hooks/pre-push
+# Configure: ACKIT_BUNDLE (default: context, relative to the repository you push from; an adopter sets the path of the shared bundle), ACKIT_SCOPE (optional: run only the checks with that scope, e.g. `code`)
+# git gives this hook the pushed refs on standard input; `ackit checks run` reads them once and passes them to every check that
+# declares `stdin: pass`. A failing `block` check fails the push.
+BUNDLE="${ACKIT_BUNDLE:-context}"
+command -v ackit >/dev/null 2>&1 || { echo "ackit not found: the push was NOT checked by the process checks (set ACKIT_REQUIRED=1 to fail instead)" >&2; [ -n "$ACKIT_REQUIRED" ] && exit 1; exit 0; }
+if [ -n "$ACKIT_SCOPE" ]; then
+  exec ackit checks run --bundle "$BUNDLE" --when pre-push --scope "$ACKIT_SCOPE" --cwd "$(pwd)"
+fi
+exec ackit checks run --bundle "$BUNDLE" --when pre-push --cwd "$(pwd)"

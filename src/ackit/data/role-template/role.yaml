@@ -1,0 +1,10 @@
+name: {{ name }}
+title: "{{ title }}"
+description: "{{ description }}"
+owns: []            # doc types this role writes, e.g. [design-spec]
+checklists: [checklist.md]
+gates: [start]      # gates the role participates in: start, handoff
+tools_allowed: [read]
+# suggested_agent: {capability: standard, reasoning: normal}   # optional; capability high|standard|fast, reasoning deep|normal, independent_of: <role>
+{% if extends %}extends: {{ extends }}   # missing parts fall back to this role
+{% endif %}

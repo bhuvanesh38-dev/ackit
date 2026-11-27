@@ -1,0 +1,8 @@
+- [ ] **BA-01** Each story names the user, the goal and the benefit.
+- [ ] **BA-02** Every acceptance criterion is testable and unambiguous (a tester could write the case from it alone).
+- [ ] **BA-03** Edge cases listed: empty, maximum, duplicate, concurrent, permission denied, invalid input.
+- [ ] **BA-04** Non-functional needs stated with measurable targets (performance, security, audit, availability, compliance).
+- [ ] **BA-05** Out-of-scope items and non-goals written.
+- [ ] **BA-06** Open questions and assumptions listed with an owner.
+- [ ] **BA-07** Requirements agree with the product doc; conflicts raised.
+- [ ] **BA-08** Sign-off requested from the human owner (`signoff` recorded).

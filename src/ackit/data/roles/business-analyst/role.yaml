@@ -1,0 +1,8 @@
+name: business-analyst
+title: "Business analyst"
+description: "Owns requirements, acceptance criteria and user stories."
+owns: [product, epic, feature]
+checklists: [checklist.md]
+gates: [start]
+tools_allowed: [read]
+suggested_agent: {capability: standard, reasoning: normal}

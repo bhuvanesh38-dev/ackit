@@ -1,0 +1,14 @@
+- [ ] **SEC-01** Authentication: every new endpoint or job requires an authenticated principal; no default or hard-coded credentials.
+- [ ] **SEC-02** Authorization: object-level checks (can this user touch this record?) and role/permission checks exist and are tested; no client-supplied ids trusted.
+- [ ] **SEC-03** Input validation: type, length, range, allow-list at the boundary; file uploads checked for type and size.
+- [ ] **SEC-04** Injection (OWASP A03): queries parameterised; no string-built SQL, shell, template, path or expression evaluation from input.
+- [ ] **SEC-05** Secrets: none in code, config in git, logs, docs or test fixtures; secrets come from the environment or a secret store.
+- [ ] **SEC-06** Sensitive data in logs and errors: no tokens, passwords, personal or financial data; errors do not leak stack traces or internals.
+- [ ] **SEC-07** Cryptography: no custom crypto, no weak hashes for passwords, TLS verification not disabled, random values from a secure source.
+- [ ] **SEC-08** Deserialization and parsing: untrusted data not deserialised into arbitrary types; XML external entities disabled.
+- [ ] **SEC-09** SSRF and open redirects: outbound URLs and redirects restricted to allow-lists.
+- [ ] **SEC-10** Session and CSRF: cookies Secure/HttpOnly/SameSite, state-changing requests protected.
+- [ ] **SEC-11** Dependencies: new or upgraded packages checked for known vulnerabilities and licence.
+- [ ] **SEC-12** Data at rest and in transit: sensitive fields protected; no wider retention than needed.
+- [ ] **SEC-13** Rate limiting, resource limits and error handling prevent trivial denial of service.
+- [ ] **SEC-14** Audit trail: security-relevant actions are logged without sensitive content.

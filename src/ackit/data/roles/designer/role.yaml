@@ -1,0 +1,8 @@
+name: designer
+title: "UX/UI designer"
+description: "Owns design specs, flows, screens and accessibility."
+owns: [design-spec]
+checklists: [checklist.md]
+gates: [start]
+tools_allowed: [read, edit-docs]
+suggested_agent: {capability: standard, reasoning: normal}

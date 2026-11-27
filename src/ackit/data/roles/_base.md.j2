@@ -1,0 +1,54 @@
+# {{ role_title }} - {{ project }}
+
+{% block mission %}{% endblock %}
+
+## Work item
+
+{% if item %}**{{ item.id }}** ({{ item.type }}, status `{{ item.status }}`): {{ item.title }}
+{% if item.depends %}Depends on: {{ item.depends | join(", ") }}
+{% endif %}
+{{ item.body }}
+{% for s in item.stages %}
+### Stage: {{ s.stage }} ({{ s.status }})
+
+{{ s.body }}
+{% endfor %}{% else %}No work item given. Ask for one before changing anything.
+{% endif %}
+## Stack and commands
+
+{{ stack }}
+
+{% for k, v in commands.items() if v %}- {{ k }}: `{{ v }}`
+{% endfor %}
+{% if tools %}Tools you may use: {{ tools | join(", ") }}.{% endif %}{% if owns %} Documents you own: {{ owns | join(", ") }}.{% endif %}
+
+{% if modules %}## Module context
+{% for m in modules %}
+### {{ m.title }} ({{ m.id }})
+
+{{ m.body }}
+{% endfor %}{% endif %}
+## Rules that bind you (blocking)
+
+{% for r in rules_blocking %}- **{{ r.title }}** - {{ r.rule }} Why: {{ r.why }} ([{{ r.id }}]({{ r.link }}))
+{% else %}- none recorded yet
+{% endfor %}{% if rules_other %}
+Advisory rules, load when relevant: {% for r in rules_other %}[{{ r.title }}]({{ r.link }}){{ ", " if not loop.last }}{% endfor %}.
+{% endif %}
+## Rules for your role
+
+{{ role_rules }}
+
+## Checklist (verify each before you finish)
+
+{{ checklist }}
+
+## What you must write
+
+{{ outputs }}
+
+## Load on demand (do not read up front)
+
+{% for r in related %}- {{ r.label }}: {{ r.link }}
+{% endfor %}
+If anything here is unclear or two sources disagree, stop and ask; the code is right when a document disagrees with it, and you must say so.

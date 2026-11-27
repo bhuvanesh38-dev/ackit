@@ -1,0 +1,39 @@
+# {{ title }}
+
+The always-loaded entry for this repository. Keep it small; everything else loads on demand through [index.md](/index.md).
+
+## Project
+
+{{ description or "One paragraph: what this repo is, for whom." }} Stack: {{ stack_line }}. Details: [product](/product.md), [tech-stack](/tech-stack.md), [architecture](/architecture.md).
+
+## Build and verify
+
+```bash
+{% for k, v in commands.items() if v %}{{ v }}   # {{ k }}
+{% endfor %}```
+
+Full flow and definition of done: [workflow](/workflow.md).
+
+## Critical rules
+
+{% if rules %}| Rule | Why |
+|---|---|
+{% for r in rules %}| [{{ r.title }}](/rules/{{ r.slug }}.md) | {{ r.why }} |
+{% endfor %}{% else %}| Rule | Why |
+|---|---|
+{% endif %}
+Rules are binding even though they are loaded on demand. A new never-break rule gets a row here and a file in `rules/`.
+
+## Load on demand
+
+| Before... | Read |
+|---|---|
+| Writing code | the [rules](/rules/) that apply, and the module doc under `modules/` when the repo has modules |
+| Starting a work item | the item under `work/` and its stage documents |
+| Reviewing | the reviewer role checklist (`ackit prompt reviewer --item ID`) |
+| Making a structural choice | the [decisions](/decisions/) and write a new one |
+| Ending a session | write a session entry (see the session-entry template: Done / Faced / Decisions / Build / Next / Blockers) |
+
+## Session rules
+
+Check `sessions/` for a pending item first. After implementation work write the session entry and any doc you changed; leave committing and pushing to a person.

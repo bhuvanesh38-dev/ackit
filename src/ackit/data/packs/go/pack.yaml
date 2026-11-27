@@ -1,0 +1,9 @@
+name: go
+description: Go module
+priority: 10
+detect:
+  any_files: [go.mod]
+stack: {languages: [Go], frameworks: []}
+variants:
+  default: {detect_files: [go.mod], workflow: {build: go build ./..., test: go test ./..., lint: go vet ./..., run: ""}, version_sources: go.mod}
+module_discovery: [dirs]

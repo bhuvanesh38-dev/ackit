@@ -1,0 +1,8 @@
+name: reviewer
+title: "Code reviewer"
+description: "Judges correctness, blast radius and rules compliance of a change."
+owns: [review]
+checklists: [checklist.md]
+gates: [handoff]
+tools_allowed: [read, run-tests]
+suggested_agent: {capability: high, reasoning: normal, independent_of: developer}

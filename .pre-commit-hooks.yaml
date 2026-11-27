@@ -1,0 +1,7 @@
+- id: ackit-validate
+  name: validate agent context (ACF)
+  description: Validate the agent context bundle with ackit.
+  entry: ackit validate
+  language: python
+  pass_filenames: false
+  files: ^context/

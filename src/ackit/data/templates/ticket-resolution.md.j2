@@ -1,0 +1,35 @@
+## Quick summary
+
+One or two lines: what the customer saw, the cause, and what resolved it.
+
+## Symptom
+
+What was reported and what was seen, in which environment, with the exact message or value.
+
+## Diagnosis
+
+What was checked, in order, and what each check showed. Name the evidence (a log line, a query result described in words, a screen).
+
+## Root cause
+
+Why it happened, and the evidence. If it is not known, say so and list what is missing as questions.
+
+## Resolution
+
+Pick the primary `resolution_type`; a ticket that was more than one type names the others here. What was done, by whom, and when, for this type: 1 data fix, 2 diagnostic query only, 3 customer guidance or process fix, 4 UI or configuration change, 5 code fix, 6 external vendor or integration issue. For a data change say what was changed and who changed it; do not write the statement as a recipe.
+
+By type, fill what applies and do not leave a blank or "refer to the attachment":
+- 1 data fix: the table or object touched, how it was applied (a migration or a direct update), the environment, whether it can be undone, and whether a permanent migration or fix is filed.
+- 2 diagnostic query only: what was looked up and what it showed, in words.
+- 3 customer guidance or process fix: what the customer was told to do, and whether the process or documentation changes.
+- 4 UI or configuration change: the setting or screen, the old and new value, the environment.
+- 5 code fix: temporary or permanent, and the tracking id in `work_item` (or why there is none).
+- 6 external vendor or integration issue: the vendor, whether the vendor's behaviour was expected or our integration was wrong, and the vendor's reference.
+
+## Verification
+
+How it was confirmed fixed (what the customer or the system showed afterwards).
+
+## Follow-up
+
+Prevention, a work item (`work_item`), an issue pattern to update, or "none" with the reason.

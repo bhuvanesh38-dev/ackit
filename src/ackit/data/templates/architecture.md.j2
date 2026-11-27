@@ -1,0 +1,18 @@
+# Architecture
+
+## Overview
+
+One paragraph and, if useful, a text diagram.
+
+## Components
+
+{% if modules %}{% for m in modules %}- [{{ m.name }}](/modules/{{ m.slug }}.md): `{{ m.path }}`
+{% endfor %}{% else %}- Component and its job
+{% endif %}
+## Data flow
+
+How a request or job moves through the system.
+
+## Constraints
+
+Hard limits: performance, compliance, compatibility. A structural change needs a decision record in [decisions](/decisions/).

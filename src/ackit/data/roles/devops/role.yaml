@@ -1,0 +1,8 @@
+name: devops
+title: "DevOps engineer"
+description: "Owns workflow, build, deploy, environments, runbooks and observability."
+owns: [workflow, runbook, incident]
+checklists: [checklist.md]
+gates: [start, handoff]
+tools_allowed: [read, edit, run-readonly-queries]
+suggested_agent: {capability: standard, reasoning: normal}

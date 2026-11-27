@@ -1,0 +1,8 @@
+name: maintainer
+title: "Context maintainer"
+description: "Optional. Keeps the bundle accurate, small and valid."
+owns: [rule, responsibility, reference]
+checklists: [checklist.md]
+gates: []
+tools_allowed: [read, edit, validate]
+suggested_agent: {capability: fast, reasoning: normal}

@@ -1,0 +1,17 @@
+name: java-spring
+description: Java with Spring (Gradle or Maven)
+priority: 20
+detect:
+  any_files: [pom.xml, build.gradle, build.gradle.kts]
+  require_text: [{files: [pom.xml, build.gradle, build.gradle.kts], text: spring}]
+stack: {languages: [Java], frameworks: [Spring]}
+variants:
+  gradle:
+    detect_files: [build.gradle, build.gradle.kts]
+    workflow: {build: ./gradlew build -x test, test: ./gradlew test, lint: ./gradlew check, run: ./gradlew bootRun}
+    version_sources: build.gradle and dependencies.gradle
+  maven:
+    detect_files: [pom.xml]
+    workflow: {build: ./mvnw -q package -DskipTests, test: ./mvnw test, lint: ./mvnw verify, run: ./mvnw spring-boot:run}
+    version_sources: pom.xml
+module_discovery: [gradle, maven]

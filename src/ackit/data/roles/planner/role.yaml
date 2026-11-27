@@ -1,0 +1,8 @@
+name: planner
+title: "Planner"
+description: "Optional. Turns an item into signed-off stages and tasks."
+owns: [feature-stage, task]
+checklists: [checklist.md]
+gates: [start]
+tools_allowed: [read]
+suggested_agent: {capability: high, reasoning: deep}

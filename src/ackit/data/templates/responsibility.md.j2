@@ -1,0 +1,22 @@
+# Responsibilities
+
+## Areas
+
+List the areas of the repo or process this covers (modules, release, security, docs).
+
+## Roles
+
+Roles are defined as profiles (`role.yaml`): kit built-ins plus any custom roles in `roles/`. Add the humans who fill them.
+
+| Role | Description | Owns (doc types) | Gates | Person |
+|---|---|---|---|---|
+{% for r in roles %}| {{ r.name }} | {{ r.title }} | {{ r.owns | join(", ") or "-" }} | {{ r.gates | join(", ") or "-" }} | {{ owner }} |
+{% endfor %}
+## RACI
+
+R = responsible (writes it), A = accountable (signs off; exactly one per row), C = consulted (reviews), I = informed. Derived from the document types and the role profiles; edit when your team differs.
+
+| Document type | R (role) | C (reviews) | A (signs off) |
+|---|---|---|---|
+{% for o in ownership %}| {{ o.type }} | {{ o.roles | join(", ") or "any" }} | {{ o.reviews }} | {{ o.signs_off }} |
+{% endfor %}

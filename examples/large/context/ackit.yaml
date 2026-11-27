@@ -1,0 +1,6 @@
+project: shop-platform
+pack: java-spring
+size: large
+agents_md_max_lines: 150
+links: warn
+severity: {}

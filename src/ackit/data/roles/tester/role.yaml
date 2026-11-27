@@ -1,0 +1,8 @@
+name: tester
+title: "Tester"
+description: "Proves or disproves that a change meets its acceptance criteria."
+owns: [test-evidence, issue]
+checklists: [checklist.md]
+gates: [start, handoff]
+tools_allowed: [read, run-tests, run-readonly-queries]
+suggested_agent: {capability: standard, reasoning: normal}

@@ -1,0 +1,8 @@
+name: generic
+description: Any repository (fallback)
+priority: 0
+detect: {any_files: []}
+stack: {languages: [], frameworks: []}
+variants:
+  default: {detect_files: [], workflow: {build: "", test: "", lint: "", run: ""}, version_sources: the build files}
+module_discovery: [dirs]

@@ -1,0 +1,9 @@
+#!/bin/sh
+# ACF pre-commit hook: validate the context bundle when its files change.
+# Install: cp hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+# Configure: ACKIT_BUNDLE (default: context), ACKIT_FLAGS (default: empty; use --strict to fail on warnings)
+BUNDLE="${ACKIT_BUNDLE:-context}"
+if git diff --cached --name-only | grep -q "^$BUNDLE/"; then
+  command -v ackit >/dev/null 2>&1 || { echo "ackit not found; skipping context validation" >&2; exit 0; }
+  ackit validate "$BUNDLE" $ACKIT_FLAGS || { echo "context bundle failed validation (ackit validate $BUNDLE)" >&2; exit 1; }
+fi

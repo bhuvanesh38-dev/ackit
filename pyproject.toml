@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ackit"
+version = "1.4.0"
+description = "Agent Context Kit: a tool-neutral standard (ACF 1.4, with an OKF adapter), templates, validator and role-prompt generator for agent context."
+license = {text = "Apache-2.0"}
+requires-python = ">=3.12"
+dependencies = ["PyYAML>=6", "Jinja2>=3.1"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+ackit = "ackit.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+ackit = ["data/**/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "adopters"]

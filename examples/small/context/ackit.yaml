@@ -1,0 +1,6 @@
+project: notes-cli
+pack: python
+size: small
+agents_md_max_lines: 150
+links: warn
+severity: {}

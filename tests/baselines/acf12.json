@@ -1,0 +1,195 @@
+{
+ "acf12-fields": [
+  [
+   "ACF034",
+   "error",
+   "work/tasks/T-002-bad.md",
+   "`external_id: ''` must be a non-empty string (the ticket key in an external tracker)"
+  ],
+  [
+   "ACF032",
+   "error",
+   "work/tasks/T-002-bad.md",
+   "8 points is above signoff_max 5: split it into smaller items before it is 'ready' (it may stay draft, blocked or cancelled)"
+  ],
+  [
+   "ACF027",
+   "error",
+   "work/tasks/T-002-bad.md",
+   "8 points is above auto_start_max 2: needs `signoff: {by, at}` before it is 'ready'"
+  ],
+  [
+   "ACF033",
+   "error",
+   "work/tasks/T-002-bad.md",
+   "runs[2].id 'r1' is not unique within runs"
+  ],
+  [
+   "ACF033",
+   "error",
+   "work/tasks/T-002-bad.md",
+   "runs[3].at is required and must be an ISO 8601 datetime, got '2026-11-18'"
+  ],
+  [
+   "ACF033",
+   "error",
+   "work/tasks/T-002-bad.md",
+   "runs[3].outcome is required and must be a non-empty string"
+  ],
+  [
+   "ACF024",
+   "warn",
+   "work/features/F-001-t.md",
+   "not listed in any index.md (run `ackit index --write`)"
+  ],
+  [
+   "ACF024",
+   "warn",
+   "work/tasks/T-001-ok.md",
+   "not listed in any index.md (run `ackit index --write`)"
+  ],
+  [
+   "ACF024",
+   "warn",
+   "work/tasks/T-002-bad.md",
+   "not listed in any index.md (run `ackit index --write`)"
+  ]
+ ],
+ "broken": [
+  [
+   "ACF009",
+   "error",
+   "work/tasks/T-002-b.md",
+   "duplicate id 'T-001' (also work/tasks/T-001-a.md)"
+  ],
+  [
+   "ACF006",
+   "error",
+   "work/tasks/T-001-a.md",
+   "status 'weird' is not allowed for type task; legal values: ['draft', 'ready', 'in-progress', 'blocked', 'in-review', 'done', 'cancelled']"
+  ],
+  [
+   "ACF018",
+   "error",
+   "work/tasks/T-001-a.md",
+   "`feature: F-009` does not resolve to any id or concept"
+  ],
+  [
+   "ACF031",
+   "error",
+   "work/tasks/T-002-b.md",
+   "`points: 4` is not in the scale [1, 2, 3, 5, 8]"
+  ],
+  [
+   "ACF016",
+   "error",
+   "work/tasks/T-002-b.md",
+   "file name should start with the id 'T-001'"
+  ],
+  [
+   "ACF018",
+   "error",
+   "work/tasks/T-002-b.md",
+   "`feature: F-009` does not resolve to any id or concept"
+  ],
+  [
+   "ACF005",
+   "error",
+   "work/tasks/T-003-c.md",
+   "missing required section 'Acceptance criteria'"
+  ],
+  [
+   "ACF018",
+   "error",
+   "work/tasks/T-003-c.md",
+   "`feature: F-009` does not resolve to any id or concept"
+  ],
+  [
+   "ACF008",
+   "warn",
+   "work/tasks/T-003-c.md",
+   "link target not found: /nope.md"
+  ],
+  [
+   "ACF024",
+   "warn",
+   "work/tasks/T-001-a.md",
+   "not listed in any index.md (run `ackit index --write`)"
+  ],
+  [
+   "ACF024",
+   "warn",
+   "work/tasks/T-002-b.md",
+   "not listed in any index.md (run `ackit index --write`)"
+  ],
+  [
+   "ACF024",
+   "warn",
+   "work/tasks/T-003-c.md",
+   "not listed in any index.md (run `ackit index --write`)"
+  ]
+ ],
+ "init-go": [],
+ "init-java": [],
+ "init-node": [],
+ "init-plain": [],
+ "init-python": [],
+ "large": [],
+ "severity-override": [
+  [
+   "ACF009",
+   "error",
+   "work/tasks/T-002-b.md",
+   "duplicate id 'T-001' (also work/tasks/T-001-a.md)"
+  ],
+  [
+   "ACF006",
+   "error",
+   "work/tasks/T-001-a.md",
+   "status 'weird' is not allowed for type task; legal values: ['draft', 'ready', 'in-progress', 'blocked', 'in-review', 'done', 'cancelled']"
+  ],
+  [
+   "ACF018",
+   "error",
+   "work/tasks/T-001-a.md",
+   "`feature: F-009` does not resolve to any id or concept"
+  ],
+  [
+   "ACF031",
+   "warn",
+   "work/tasks/T-002-b.md",
+   "`points: 4` is not in the scale [1, 2, 3, 5, 8]"
+  ],
+  [
+   "ACF016",
+   "error",
+   "work/tasks/T-002-b.md",
+   "file name should start with the id 'T-001'"
+  ],
+  [
+   "ACF018",
+   "error",
+   "work/tasks/T-002-b.md",
+   "`feature: F-009` does not resolve to any id or concept"
+  ],
+  [
+   "ACF005",
+   "error",
+   "work/tasks/T-003-c.md",
+   "missing required section 'Acceptance criteria'"
+  ],
+  [
+   "ACF018",
+   "error",
+   "work/tasks/T-003-c.md",
+   "`feature: F-009` does not resolve to any id or concept"
+  ],
+  [
+   "ACF008",
+   "error",
+   "work/tasks/T-003-c.md",
+   "link target not found: /nope.md"
+  ]
+ ],
+ "small": []
+}

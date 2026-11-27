@@ -1,0 +1,8 @@
+- [ ] **SUP-01** Every section is filled from evidence, or carries a question naming the missing fact (no placeholder text, no "refer to the attachment").
+- [ ] **SUP-02** `resolution_type` is one of 1 to 6, chosen by the evidence, or left empty with a question.
+- [ ] **SUP-03** `tickets` holds the tracker keys; `module`, `vendors` and `tenants` hold registered values only.
+- [ ] **SUP-04** Root cause is separated from symptom, and the evidence for the cause is named.
+- [ ] **SUP-05** No data change is written as a recipe; the page says what was changed and by whom.
+- [ ] **SUP-06** No credentials, tokens or customer personal data are copied into the page.
+- [ ] **SUP-07** A type 1 or 5 resolution names its `work_item` or says why there is none.
+- [ ] **SUP-08** `status` is `draft` and there is no `verified` entry or `verified_at_commit`; `ackit validate` reports no error for the page, except an empty required value that an open `Question:` explains.

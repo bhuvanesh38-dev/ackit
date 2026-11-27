@@ -1,0 +1,8 @@
+- [ ] **ARC-01** Blast radius listed: modules, contracts and consumers affected, including upstream or cross-module symbols.
+- [ ] **ARC-02** Tier and dependency rules respected; any exception is a recorded decision.
+- [ ] **ARC-03** Data impact: schema changes, migrations, backfill, rollback and compatibility window described.
+- [ ] **ARC-04** An ADR exists with at least two options, the decision and the Why, and consequences.
+- [ ] **ARC-05** Non-functional needs (performance, security, availability) addressed by the design.
+- [ ] **ARC-06** Architecture, module and tech-stack docs updated and consistent with the design.
+- [ ] **ARC-07** Failure modes and observability considered (what breaks, how it is detected).
+- [ ] **ARC-08** Sign-off requested from the human owner.

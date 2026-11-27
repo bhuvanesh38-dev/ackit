@@ -1,0 +1,7 @@
+agent-context-kit
+Copyright 2026 agent-context-kit contributors
+
+Licensed under the Apache License, Version 2.0. See LICENSE.
+
+The adapter reads and writes the Open Knowledge Format (OKF) v0.2, published by
+Google Cloud Platform under the Apache License 2.0. No OKF source text is included.

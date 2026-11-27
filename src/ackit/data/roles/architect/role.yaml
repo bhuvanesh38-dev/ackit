@@ -1,0 +1,8 @@
+name: architect
+title: "Architect"
+description: "Owns architecture, module docs, decisions and the tech stack."
+owns: [architecture, module, decision, tech-stack]
+checklists: [checklist.md]
+gates: [start]
+tools_allowed: [read, edit-docs]
+suggested_agent: {capability: high, reasoning: deep}

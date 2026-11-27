@@ -1,0 +1,11 @@
+# Example: how an adopter maps the kit's vendor-neutral capability tiers (role.yaml `suggested_agent.capability`)
+# to real models. The kit never reads this file; your orchestrator or tooling does. Replace the placeholders.
+capability:
+  high: "<your most capable model>"      # developer, architect, security, reviewer, planner
+  standard: "<your mid-tier model>"      # tester, business-analyst, designer, devops
+  fast: "<your cheapest fast model>"     # maintainer, routine edits
+reasoning:
+  deep: {effort: high}                   # whatever your tooling calls extended thinking
+  normal: {effort: default}
+# `independent_of: developer` on the reviewer means: do not run the reviewer on the same agent instance
+# (ideally not the same model) that wrote the change.

@@ -1,0 +1,307 @@
+# ACF v0.1 type registry. This file IS the machine-readable half of SPEC.md section 5.
+# A bundle may extend or override it under `types:` in its ackit.yaml (no code needed to add a type).
+acf_version: "0.1"
+# roles are not listed here: they are directories with a role.yaml (kit data/roles/ and the bundle's roles/ overlay)
+
+status_sets:
+  doc:
+    values: [draft, stable, deprecated]
+    initial: draft
+    transitions: {draft: [stable, deprecated], stable: [draft, deprecated], deprecated: []}
+    human_verified: [stable]
+  work:
+    values: [draft, ready, in-progress, blocked, in-review, done, cancelled]
+    initial: draft
+    transitions:
+      draft: [ready, cancelled]
+      ready: [in-progress, draft, cancelled]
+      in-progress: [in-review, blocked, cancelled]
+      blocked: [in-progress, cancelled]
+      in-review: [done, in-progress]
+      done: []
+      cancelled: []
+    human_verified: []
+  decision:
+    values: [proposed, accepted, rejected, superseded, deprecated]
+    initial: proposed
+    transitions: {proposed: [accepted, rejected], accepted: [superseded, deprecated], rejected: [], superseded: [], deprecated: []}
+    human_verified: [accepted]
+  incident:
+    values: [open, mitigated, resolved, closed]
+    initial: open
+    transitions: {open: [mitigated, resolved], mitigated: [resolved, open], resolved: [closed, open], closed: []}
+    human_verified: []
+  record:
+    values: [draft, final]
+    initial: draft
+    transitions: {draft: [final], final: []}
+    human_verified: []
+  stage:
+    values: [draft, signed-off]
+    initial: draft
+    transitions: {draft: [signed-off], signed-off: [draft]}
+    human_verified: []
+
+stages: [analysis, design, plan, tasks, test-plan, journal]   # large-feature stage order
+stage_sections:
+  analysis: [Problem, Findings, Open questions]
+  design: [Approach, Alternatives, Decisions]
+  plan: [Steps, Risks]
+  tasks: [Tasks]
+  test-plan: [Cases, Environments]
+
+types:
+  entry:
+    dir: ""
+    purpose: Small always-loaded entry file (AGENTS.md). Points to everything else.
+    status_set: doc
+    required: [title]
+    sections: [Project, Build and verify, Critical rules, Load on demand]
+    owner: {writes: maintainer, reviews: any human owner, signs_off: human owner, updates: when a never-break rule, a build command or the doc map changes}
+    rules: ["At most `agents_md_max_lines` lines (default 150).", "Detail lives in rules/ or reference/; this file holds one row per document.", "Every rule here has a Why."]
+  product:
+    dir: ""
+    purpose: What the product is, for whom, and what success means.
+    status_set: doc
+    required: [title, description]
+    sections: [Purpose, Users, Goals, Non-goals]
+    owner: {writes: business-analyst, reviews: human owner, signs_off: human owner, updates: when scope or users change}
+    rules: ["States non-goals explicitly.", "No implementation detail; link to architecture instead."]
+  tech-stack:
+    dir: ""
+    purpose: Languages, frameworks, versions, infrastructure.
+    status_set: doc
+    required: [title, languages]
+    sections: [Languages and frameworks, Infrastructure, Conventions]
+    owner: {writes: architect, reviews: reviewer, signs_off: human owner, updates: when a dependency or runtime major version changes}
+    rules: ["Versions are sourced from the build files (say which); never invent them.", "Conventions state the style guide in force."]
+  workflow:
+    dir: ""
+    purpose: Build, test, lint and review commands, branching and PR flow.
+    status_set: doc
+    required: [title, commands]
+    sections: [Commands, Branching and review, Definition of done]
+    owner: {writes: devops, reviews: reviewer, signs_off: human owner, updates: when a command or the review flow changes}
+    rules: ["`commands` frontmatter has build, test and lint keys (empty string when not applicable).", "Every command was actually run by the author."]
+  architecture:
+    dir: ""
+    purpose: How the system is put together; boundaries and data flow.
+    status_set: doc
+    required: [title]
+    sections: [Overview, Components, Data flow, Constraints]
+    owner: {writes: architect, reviews: reviewer, signs_off: human owner, updates: on any structural change, via a decision record}
+    rules: ["A structural change needs a decision record first.", "Diagrams are text (mermaid or ASCII) so they diff."]
+  module:
+    dir: modules
+    purpose: One module or package of a large repository - its job, API, dependencies and owner.
+    status_set: doc
+    id_pattern: "^M-[a-z0-9][a-z0-9-]*$"
+    required: [title, id, path]
+    sections: [Responsibility, Public surface, Dependencies, Owners]
+    owner: {writes: architect, reviews: reviewer, signs_off: module owner, updates: when the module public surface or dependencies change}
+    rules: ["`path` points at the source directory (relative to the repo).", "Dependencies list only modules actually imported."]
+  rule:
+    dir: rules
+    purpose: A never-break rule with the reason it exists.
+    status_set: doc
+    id_pattern: "^R-[a-z0-9][a-z0-9-]*$"
+    required: [title, id, severity]
+    enums: {severity: [blocking, advisory]}
+    sections: [Rule, Why, How to check]
+    human_verified: true
+    owner: {writes: maintainer, reviews: human owner, signs_off: human owner, updates: when the reason changes or an incident shows a gap}
+    rules: ["A rule without a Why is rejected.", "`applies_to` (roles) and `modules` narrow who sees it in generated prompts.", "`code_lines` (any type) limits it to those code lines; absent means every line.", "A stable rule is human-verified."]
+  responsibility:
+    dir: ""
+    purpose: RACI - who is Responsible, Accountable, Consulted, Informed per area and per document type.
+    status_set: doc
+    required: [title]
+    sections: [Areas, Roles, RACI]
+    owner: {writes: maintainer, reviews: human owner, signs_off: human owner, updates: when a team or role changes}
+    rules: ["Exactly one Accountable per row.", "Roles use the ACF role names."]
+  epic:
+    dir: work/epics
+    purpose: A body of work delivered by several features.
+    status_set: work
+    id_pattern: "^E-\\d{3,}$"
+    required: [title, id, status]
+    sections: [Goal, Scope, Success criteria]
+    optional: [external_id]
+    done_requires: [children-done]
+    owner: {writes: business-analyst, reviews: human owner, signs_off: human owner, updates: when scope changes; closed when all features are done}
+    rules: ["Done only when every child feature is done.", "Success criteria are measurable."]
+  feature:
+    dir: work/features
+    purpose: A deliverable change. tier small = one document; tier large = a folder of staged documents signed off in order.
+    status_set: work
+    id_pattern: "^F-\\d{3,}$"
+    required: [title, id, status, tier]
+    enums: {tier: [small, large]}
+    sections:
+      by: tier
+      small: [Goal, Acceptance criteria, Design, Plan, Test plan]
+      large: [Goal, Acceptance criteria, Stages]
+    refs: [epic, depends_on, modules]
+    optional: [external_id]
+    done_requires: [test-evidence, review, journal]
+    owner: {writes: business-analyst (requirements), architect (design), developer (plan, tasks), reviews: reviewer, signs_off: human owner per stage, updates: every stage change; journal on every decision}
+    rules: ["Large features: stages analysis, design, plan, tasks, test-plan, journal; a stage is signed off before the next is started.", "Small features carry `signoff` before status ready.", "Done needs test evidence, a review record and a journal entry."]
+  feature-stage:
+    dir: work/features
+    purpose: One stage document of a large feature.
+    status_set: stage
+    required: [title, feature, stage, status]
+    refs: [feature]
+    owner: {writes: per stage - planner for analysis and design, developer for plan and tasks, tester for test-plan, reviews: reviewer, signs_off: human owner (signoff.by), updates: until signed off; afterwards only via the journal}
+    rules: ["`signoff: {by, at}` is required at status signed-off.", "A signed-off stage is not edited; corrections go to the journal."]
+  task:
+    dir: work/tasks
+    purpose: A unit of work under a feature, small enough for one agent session.
+    status_set: work
+    id_pattern: "^T-\\d{3,}$"
+    required: [title, id, status, feature]
+    sections: [Goal, Acceptance criteria]
+    refs: [feature, depends_on, modules]
+    optional: [points, runs, external_id]
+    owner: {writes: planner or developer, reviews: reviewer, signs_off: reviewer, updates: status changes}
+    rules: ["Names the module(s) it touches.", "Acceptance criteria are checkable.", "`points` (optional) is in the configured scale; above `signoff_max` it is split before it is ready, above `auto_start_max` it needs `signoff`.", "`runs` (optional) records each run: id, at, outcome, and optionally tokens, turns, commit, by."]
+  issue:
+    dir: work/issues
+    purpose: A bug or defect report and its fix.
+    status_set: work
+    id_pattern: "^I-\\d{3,}$"
+    required: [title, id, status, severity]
+    enums: {severity: [critical, high, medium, low]}
+    sections: [Symptom, Expected, Reproduction, Cause, Fix]
+    refs: [feature, depends_on, modules]
+    optional: [points, runs, external_id]
+    done_requires: [test-evidence, review]
+    owner: {writes: tester or developer, reviews: reviewer, signs_off: reviewer, updates: as the cause becomes known}
+    rules: ["Reproduction is concrete enough to run.", "Done needs test evidence of the fix and a review record.", "`points` and `runs` (optional) follow the same rules as on a task."]
+  incident:
+    dir: incidents
+    purpose: A production or environment failure - cause, fix, checks.
+    status_set: incident
+    id_pattern: "^INC-\\d{3,}$"
+    required: [title, id, status, severity]
+    enums: {severity: [critical, high, medium, low]}
+    sections: [Symptom, Cause, Fix, Checks, Follow-ups]
+    owner: {writes: developer, reviews: human owner, signs_off: human owner, updates: until closed}
+    rules: ["Records evidence for the cause, not a guess.", "Follow-ups become issues or rules."]
+  decision:
+    dir: decisions
+    purpose: Architecture or process decision record (ADR) - what was decided and why.
+    status_set: decision
+    id_pattern: "^ADR-\\d{4,}$"
+    required: [title, id, status, date]
+    sections: [Context, Options, Decision, Why, Consequences]
+    refs: [supersedes, superseded_by]
+    human_verified: true
+    owner: {writes: planner or developer, reviews: reviewer, signs_off: human owner, updates: never edited once accepted - superseded by a new record}
+    rules: ["Options lists at least two options.", "Why states the deciding reason, not a restatement.", "`supersedes` and `superseded_by` are reciprocal."]
+  journal:
+    human_verified: false
+    dir: journals
+    purpose: Append-only record of decisions, corrections and findings for one feature or document set.
+    status_set: doc
+    required: [title, about]
+    owner: {writes: whoever made the decision, reviews: none, signs_off: none, updates: same turn as the decision or correction}
+    rules: ["Entries: `## YYYY-MM-DD - kind: title`, kind is decision, correction, finding or note.", "Newest first. Past entries are never edited; correct with a new entry.", "Living docs state only current truth; history lives here."]
+  session:
+    dir: sessions
+    purpose: Per-branch (or per-item) session log, one entry per working session.
+    status_set: record
+    required: [title, author]
+    owner: {writes: the agent or person who did the work, reviews: none, signs_off: none, updates: after every implementation session}
+    rules: ["Entry heading: `## YYYY-MM-DD (Day, Www) - branch @ sha - title`.", "Labels Done, Faced, Decisions, Build, Next, Blockers are all present.", "Written without being asked; committing it is a person's call."]
+  session-index:
+    dir: sessions
+    purpose: Rolling one-line-per-session index (working memory).
+    status_set: record
+    required: [title, author]
+    owner: {writes: the agent or person who did the work, reviews: none, signs_off: none, updates: one line per session}
+    rules: ["One bullet per session: `- YYYY-MM-DD - branch - title - [entry](path)`.", "Older lines move to the session log; the index stays short."]
+  review:
+    dir: reviews
+    purpose: Findings of a code, security or test review of one work item.
+    status_set: record
+    required: [title, item, role, verdict]
+    enums: {verdict: [approve, changes-requested, blocked]}
+    sections: [Scope, Findings, Resolution, Verdict]
+    refs: [item]
+    owner: {writes: the reviewing role, reviews: developer (resolves findings), signs_off: reviewer, updates: until every finding is resolved}
+    rules: ["Each finding has file:line, severity and a resolution.", "Verdict follows from the findings."]
+  test-evidence:
+    dir: evidence
+    purpose: What was run and what it showed, for one work item.
+    status_set: record
+    required: [title, item, result]
+    enums: {result: [pass, fail, partial]}
+    sections: [Commands, Results, Coverage]
+    refs: [item]
+    owner: {writes: tester or developer, reviews: reviewer, signs_off: reviewer, updates: per test run}
+    rules: ["Commands are copy-pasteable and were run.", "Results quote real output, not a paraphrase."]
+  handoff:
+    dir: handoffs
+    purpose: Hand a finished item to a person (PR) or the next agent.
+    status_set: record
+    required: [title, item]
+    sections: [Summary, Evidence, Open items, Needs a person]
+    refs: [item]
+    owner: {writes: developer, reviews: human owner, signs_off: human owner, updates: once per handoff}
+    rules: ["Links the evidence and review records.", "Merging is always listed under Needs a person."]
+  reference:
+    human_verified: false
+    dir: reference
+    purpose: Stable factual material (API tables, schemas, glossary) loaded on demand.
+    status_set: doc
+    required: [title, description]
+    owner: {writes: developer, reviews: reviewer, signs_off: none, updates: when the facts change; `review_by` is set}
+    rules: ["Facts only, with `sources`.", "Set `review_by` - facts rot."]
+  ticket-resolution:
+    dir: ""
+    purpose: What was wrong and what was done for one or more support tickets - symptom, diagnosis, cause, resolution, how it was checked.
+    status_set: doc
+    required: [title, description, resolution_type, tickets]
+    enums: {resolution_type: [1, 2, 3, 4, 5, 6]}
+    optional: [scope, tenants, vendors, module, code_line, branch, verified_at_commit, work_item]
+    refs: [work_item]
+    vocab: {module: module, vendors: vendor, tenants: tenant}
+    sections: [Quick summary, Symptom, Diagnosis, Root cause, Resolution, Verification, Follow-up]
+    owner: {writes: support agent, reviews: support engineer, signs_off: human owner, updates: when the ticket is reopened or the cause turns out different; `review_by` is set}
+    rules: ["`resolution_type` is 1 data fix, 2 diagnostic query only, 3 customer guidance or process fix, 4 UI or configuration change, 5 code fix, 6 external vendor or integration issue.", "`tickets` holds the tracker keys; relations between tickets (duplicate, parent, related) stay in the tracker.", "Fill only what the evidence supports; list missing facts as questions, not as placeholders.", "Never write a data change as a recipe to run; say what was found and who changed it.", "A resolution of type 1 or 5 normally needs an engineering work item: put its id in `work_item`."]
+  issue-pattern:
+    dir: ""
+    purpose: A recurring problem seen across several resolutions - how to recognise it, why it happens, what resolves it.
+    status_set: doc
+    required: [title, description]
+    sections: [Problem, Signals, Cause, Resolution, Related resolutions]
+    owner: {writes: support agent, reviews: support engineer, signs_off: human owner, updates: when a new resolution confirms or changes the pattern; `review_by` is set}
+    rules: ["A pattern needs at least two resolutions behind it; link them under Related resolutions.", "Signals are what a support agent can see before diagnosis (message, screen, value), not the cause.", "Never write a data change as a recipe to run."]
+  platform-behaviour:
+    dir: ""
+    purpose: How the system behaves, true on every code line - so a support agent or tester can tell expected behaviour from a defect.
+    status_set: doc
+    required: [title, description]
+    sections: [Behaviour, Applies to, Evidence]
+    owner: {writes: developer or support agent, reviews: reviewer, signs_off: human owner, updates: when the behaviour changes; `review_by` is set}
+    rules: ["State the behaviour, not the code; give the evidence (a source file, a test, a verified ticket).", "Applies to names the environments or code lines; if it differs by one, say which.", "Set `review_by` - behaviour changes with releases."]
+  design-spec:
+    dir: design
+    purpose: UX/UI specification of a work item - flows, screens, states, accessibility, handoff.
+    status_set: doc
+    id_pattern: "^D-[a-z0-9][a-z0-9-]*$"
+    required: [title, id, item]
+    sections: [Flows, Screens, States, Accessibility, Handoff]
+    refs: [item]
+    owner: {writes: designer, reviews: developer and business-analyst, signs_off: human owner, updates: when the requirements or the design system change}
+    rules: ["Every screen lists default, empty, loading and error states.", "States the accessibility target and the checks that prove it.", "Handoff names tokens, components and interactions the developer must use."]
+  runbook:
+    dir: runbooks
+    purpose: Operational procedure - how to deploy, roll back, recover or diagnose a part of the system.
+    status_set: doc
+    id_pattern: "^RB-[a-z0-9][a-z0-9-]*$"
+    required: [title, id]
+    sections: [Purpose, Preconditions, Steps, Rollback, Verification, Monitoring]
+    owner: {writes: devops, reviews: developer, signs_off: human owner, updates: after every incident or pipeline change; `review_by` is set}
+    rules: ["Steps are idempotent or say so.", "Rollback is written before the change is made.", "No secret values; name the secret store entry."]

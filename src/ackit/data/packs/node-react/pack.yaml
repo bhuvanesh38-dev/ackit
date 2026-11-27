@@ -1,0 +1,11 @@
+name: node-react
+description: Node.js / TypeScript / React
+priority: 20
+detect:
+  any_files: [package.json]
+stack: {languages: [JavaScript or TypeScript], frameworks: [Node.js, React]}
+variants:
+  pnpm: {detect_files: [pnpm-lock.yaml], workflow: {build: pnpm build, test: pnpm test, lint: pnpm lint, run: pnpm dev}, version_sources: package.json}
+  yarn: {detect_files: [yarn.lock], workflow: {build: yarn build, test: yarn test, lint: yarn lint, run: yarn dev}, version_sources: package.json}
+  npm: {detect_files: [package.json], workflow: {build: npm run build, test: npm test, lint: npm run lint, run: npm run dev}, version_sources: package.json}
+module_discovery: [npm]

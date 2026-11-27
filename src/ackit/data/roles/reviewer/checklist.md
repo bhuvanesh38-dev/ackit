@@ -1,0 +1,11 @@
+- [ ] **REV-01** Change matches the work item; every acceptance criterion is met; nothing unrelated is included.
+- [ ] **REV-02** Correctness: edge cases, null/empty, error paths, concurrency and transaction boundaries reasoned through.
+- [ ] **REV-03** Blast radius: callers and usages of each changed symbol checked (including config, queries and tests); upstream or cross-module symbols flagged.
+- [ ] **REV-04** DRY: no second copy of existing logic; a fact about one object lives on that object.
+- [ ] **REV-05** Rules compliance: each blocking rule that applies is satisfied (named in the review).
+- [ ] **REV-06** Tests: new behaviour covered, failure cases covered, tests assert outcomes not implementation; evidence record read.
+- [ ] **REV-07** Performance: no repeated I/O or queries inside loops; sizes bounded.
+- [ ] **REV-08** Errors and logging: no swallowed exceptions without a stated reason; no sensitive data logged.
+- [ ] **REV-09** Public contracts (API, schema, config, migration) are backward compatible or the break is a recorded decision.
+- [ ] **REV-10** Docs and context updated: module/reference docs, journal, session entry.
+- [ ] **REV-11** Security checklist run when the change touches auth, input or data (link the security review).

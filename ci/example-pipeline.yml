@@ -1,0 +1,6 @@
+# Example for a host with a pipelines file (script-based). Only the two script lines matter.
+image: python:3.12
+validate-context:
+  script:
+    - pip install ackit
+    - ackit validate context --strict

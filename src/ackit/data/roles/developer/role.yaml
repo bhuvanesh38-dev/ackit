@@ -1,0 +1,8 @@
+name: developer
+title: "Developer"
+description: "Implements work items with minimal, verified changes."
+owns: [task, session, session-index, handoff]
+checklists: [checklist.md]
+gates: [start, handoff]
+tools_allowed: [read, edit, run-tests, git-local]
+suggested_agent: {capability: high, reasoning: normal}
